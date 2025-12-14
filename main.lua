@@ -34,7 +34,7 @@ uiDragDetector.Parent = frame
 local AdminAnims = Instance.new("TextButton")
 AdminAnims.Parent = frame
 AdminAnims.Text = "Admin Anim Pack"
-AdminAnims.Size = UDim2.new(0, 200, 0, 50)
+AdminAnims.Size = UDim2.new(1, 0, 0, 50)
 
 local X = Instance.new("TextButton")
 X.Parent = frame
@@ -115,7 +115,7 @@ end)
 local DoomAnims = Instance.new("TextButton")
 DoomAnims.Parent = frame
 DoomAnims.Text = "Speedy!"
-DoomAnims.Size = UDim2.new(0, 200, 0, 50)
+DoomAnims.Size = UDim2.new(1, 0, 0, 50)
 DoomAnims.Position = UDim2.new(0, 0, 0, 50)
 
 DoomAnims.Activated:Connect(function()
@@ -125,7 +125,7 @@ end)
 local Jump = Instance.new("TextButton")
 Jump.Parent = frame
 Jump.Text = "Jump in round"
-Jump.Size = UDim2.new(0, 200, 0, 50)
+Jump.Size = UDim2.new(1, 0, 0, 50)
 Jump.Position = UDim2.new(0, 0, 0, 100)
 
 Jump.Activated:Connect(function()
@@ -149,7 +149,7 @@ end)
 local svin = Instance.new("TextButton")
 svin.Parent = frame
 svin.Text = "saveinstance()"
-svin.Size = UDim2.new(0, 200, 0, 50)
+svin.Size = UDim2.new(1, 0, 0, 50)
 svin.Position = UDim2.new(0, 0, 0, 150)
 
 svin.Activated:Connect(function()
@@ -161,7 +161,7 @@ end)
 local HeadView = Instance.new("TextButton")
 HeadView.Parent = frame
 HeadView.Text = "Head CameraSubject"
-HeadView.Size = UDim2.new(0, 200, 0, 50)
+HeadView.Size = UDim2.new(1, 0, 0, 50)
 HeadView.Position = UDim2.new(0, 0, 0, 200)
 
 HeadView.Activated:Connect(function()
@@ -171,9 +171,51 @@ end)
 local FixView = Instance.new("TextButton")
 FixView.Parent = frame
 FixView.Text = "Normal CameraSubject"
-FixView.Size = UDim2.new(0, 200, 0, 50)
+FixView.Size = UDim2.new(1, 0, 0, 50)
 FixView.Position = UDim2.new(0, 0, 0, 250)
 
 FixView.Activated:Connect(function()
 	workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
+end)
+
+local FakeSlash = Instance.new("TextButton")
+FakeSlash.Parent = frame
+FakeSlash.Text = "Fake Slash (SHED ONLY)"
+FakeSlash.Size = UDim2.new(1, 0, 0, 50)
+FakeSlash.Position = UDim2.new(0, 0, 0, 300)
+
+FakeSlash.Activated:Connect(function()
+	local uis = game:GetService("UserInputService")
+local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+local deb = false
+
+uis.InputBegan:Connect(function(input, gp)
+	if gp or deb then return end
+	if input.KeyCode == Enum.KeyCode.R then
+			deb = true
+			local unsheath = Instance.new("Sound")
+			unsheath.SoundId = "rbxassetid://12222225"
+			unsheath.Volume = 1
+			unsheath.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+			local slash = Instance.new("Sound")
+			slash.SoundId = "rbxassetid://12222208"
+			slash.Volume = 1
+			slash.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+			local anim = Instance.new("Animation")
+			anim.AnimationId = "rbxassetid://116618003477002"
+			humanoid:FindFirstChildOfClass("Animator"):LoadAnimation(anim):Play()
+   	        game.Players.LocalPlayer.Character.Sword.Transparency = 0
+			anim:Destroy()
+			unsheath:Play()
+			wait(0.5)
+			slash:Play()
+			wait(1)
+			game.Players.LocalPlayer.Character.Sword.Transparency = 1
+			deb = false
+			wait(2)
+			slash:Destroy()
+			unsheath:Destroy()
+		end
+	end)
 end)
