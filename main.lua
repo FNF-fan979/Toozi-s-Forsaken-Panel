@@ -196,12 +196,12 @@ uis.InputBegan:Connect(function(input, gp)
 			local unsheath = Instance.new("Sound")
 			unsheath.SoundId = "rbxassetid://12222225"
 			unsheath.Volume = 1
-			unsheath.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+			unsheath.Parent = game.Players.LocalPlayer.Character.Sword
 
 			local slash = Instance.new("Sound")
 			slash.SoundId = "rbxassetid://12222208"
 			slash.Volume = 1
-			slash.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+			slash.Parent = game.Players.LocalPlayer.Character.Sword
 			local anim = Instance.new("Animation")
 			anim.AnimationId = "rbxassetid://116618003477002"
 			humanoid:FindFirstChildOfClass("Animator"):LoadAnimation(anim):Play()
